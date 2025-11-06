@@ -6,9 +6,10 @@ from ui.menu_read import MenuRead
 
 def main() -> None:
     file_path = Path("data/movies.csv")
-    menu_main = MenuWrite(file_path=file_path)
+    # menu_main = MenuWrite(file_path=file_path)
+    # menu_main.show()
     menu_read = MenuRead(file_path=file_path)
-    menu_main.show()
+    menu_read.show()
 
 
 if __name__ == "__main__":

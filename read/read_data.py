@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 
 from models.movies import Movie
-from exceptions.path_does_not_exist_exception import PathDoesNotExistException
+from read.exceptions.path_does_not_exist_exception import PathDoesNotExistException
 
 
 def load_csv(file_path: Path) -> dict[int, Movie]:
@@ -13,7 +13,7 @@ def load_csv(file_path: Path) -> dict[int, Movie]:
     with open(file=file_path, mode="rt", encoding="utf-8", newline="") as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         for row in csv_reader:
-            movie: Movie = Movie(titre=row['titre'], annee_production=row['annee_production'], genre=row['genre'], age_limite=row['age_limite'])
+            movie: Movie = Movie(titre=row['titre'], annee_production=int(row['annee_production']), genre=row['genre'], age_limite=int(row['age_limite']))
             movies.update({Movie.ID: movie})
     return movies
 
@@ -37,14 +37,15 @@ def write_csv(file_path: Path, movies: dict[int, Movie]) -> None:
 
 # Récupérer un film par son titre.
 
-def get_movie_title(file_path: Path, titre: str) -> Movie|None:
+def get_movies_title(file_path: Path, titre: str) -> list[Movie]:
     if type(titre) is not str:
         raise TypeError("The type of 'titre' must be str.")
     movies: dict[int, Movie] = load_csv(file_path=file_path)
+    movies_accepted: list[Movie] = []
     for movie in movies.values():
-        if movie.titre == titre:
-            return movie
-    return None
+        if titre in movie.titre:
+            movies_accepted.append(movie)
+    return movies_accepted
 
 # Récupérer la liste des films ayant une limite d’âge inférieure ou égale à une valeur donnée.
 
@@ -54,7 +55,7 @@ def get_movies_age_limit(file_path: Path, age_limite: int) -> list[Movie]:
     movies: dict[int, Movie] = load_csv(file_path=file_path)
     movies_accepted: list[Movie] = []
     for movie in movies.values():
-        if movie.age_limite == age_limite:
+        if movie.age_limite <= age_limite:
             movies_accepted.append(movie)
     return movies_accepted
 
@@ -72,16 +73,16 @@ def get_movies_genre(file_path: Path, genre: str) -> list[Movie]:
 
 # Récupérer la liste des films produits entre deux années données (année de début et année de fin).
 
-def get_movies_annees_production(file_path: Path, annee1: int, annee2: int) -> list[Movie]:
-    if type(annee1) is not int:
+def get_movies_annees_production(file_path: Path, annee_production1: int, annee_production2: int) -> list[Movie]:
+    if type(annee_production1) is not int:
         raise TypeError("The type of 'annee1' must be str.")
-    if type(annee2) is not int:
+    if type(annee_production2) is not int:
         raise TypeError("The type of 'annee2' must be str.")
-    if annee1 > annee2:
+    if annee_production1 > annee_production2:
         raise TypeError("'annee1' must be less than or equal to 'annee2'")
     movies: dict[int, Movie] = load_csv(file_path=file_path)
     movies_accepted: list[Movie] = []
     for movie in movies.values():
-        if annee1 <= movie.annee_production <= annee2:
+        if annee_production1 <= movie.annee_production <= annee_production2:
             movies_accepted.append(movie)
     return movies_accepted

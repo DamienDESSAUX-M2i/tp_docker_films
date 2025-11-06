@@ -12,7 +12,7 @@ from write.exceptions.invalid_year_exception import InvalidYearException
 class MenuWrite:
     def __init__(self, file_path: Path):
         self.file_path = file_path
-    
+
     def user_input_id(self) -> str:
         user_input: str = input("Id : ").capitalize()
         if user_input.isdigit():
@@ -27,11 +27,11 @@ class MenuWrite:
             return user_input
         raise InvalidTitleException("Un titre ne peut contenir que des caractères alphabétiques.")
 
-    def user_input_annee_publication(self) -> int:
-        user_input: str = input("Année de publication : ")
+    def user_input_annee_production(self) -> int:
+        user_input: str = input("Année de production : ")
         if user_input.isdigit():
             return int(user_input)
-        raise InvalidAgeLimitException("L'année de publication doit être un nombre entier.")
+        raise InvalidAgeLimitException("L'année de production doit être un nombre entier.")
 
     def user_input_genre(self) -> str:
         user_input: str = input("Genre : ").capitalize()
@@ -52,7 +52,7 @@ class MenuWrite:
                 return id
             except InvalidIdException as e:
                 e.display_message_error()
-    
+
     def show_title(self) -> str:
         while True:
             try:
@@ -61,14 +61,14 @@ class MenuWrite:
             except InvalidTitleException as e:
                 e.display_message_error()
 
-    def show_annee_publication(self) -> int:
+    def show_annee_production(self) -> int:
         while True:
             try:
-                annee_publication = self.user_input_annee_publication()
-                return annee_publication
+                annee_production = self.user_input_annee_production()
+                return annee_production
             except InvalidAgeLimitException as e:
                 e.display_message_error()
-    
+
     def show_genre(self) -> str:
         while True:
             try:
@@ -92,25 +92,25 @@ class MenuWrite:
                 match user_input:
                     case "1":
                         titre = self.show_title()
-                        annee_publication = self.show_annee_publication()
+                        annee_production = self.show_annee_production()
                         genre = self.show_genre()
                         age_limit = self.show_age_limit()
-                        manip_data.add_movie(file_path=self.file_path, titre=titre, annee_production=annee_publication, genre=genre, age_limite=age_limit)
+                        manip_data.add_movie(file_path=self.file_path, titre=titre, annee_production=annee_production, genre=genre, age_limite=age_limit)
                         print("Film correctement ajouté !")
                     case "2":
                         id = self.show_id()
                         titre = self.show_title()
-                        annee_publication = self.show_annee_publication()
+                        annee_production = self.show_annee_production()
                         genre = self.show_genre()
                         age_limit = self.show_age_limit()
-                        manip_data.mofify_movie(file_path=self.file_path, id=id, titre=titre, annee_production=annee_publication, genre=genre, age_limite=age_limit)
+                        manip_data.mofify_movie(file_path=self.file_path, id=id, titre=titre, annee_production=annee_production, genre=genre, age_limite=age_limit)
                         print("Film correctement modifié !")
                     case "3":
                         id = self.show_id()
                         manip_data.remove_movie(file_path=self.file_path, id=id)
                         print("Film correctement retiré !")
                     case "0":
-                        exit()
+                        break
                     case _:
                         raise ValueError("Erreur de saisie. Veuillez recommencer.")
             except ValueError as e:

@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 
 from models.movies import Movie
-from exceptions.path_does_not_exist_exception import PathDoesNotExistException
+from write.exceptions.path_does_not_exist_exception import PathDoesNotExistException
 
 
 def load_csv(file_path: Path) -> dict[int, Movie]:
@@ -13,7 +13,7 @@ def load_csv(file_path: Path) -> dict[int, Movie]:
     with open(file=file_path, mode="rt", encoding="utf-8", newline="") as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         for row in csv_reader:
-            movie: Movie = Movie(titre=row['titre'], annee_production=row['annee_production'], genre=row['genre'], age_limite=row['age_limite'])
+            movie: Movie = Movie(titre=row['titre'], annee_production=int(row['annee_production']), genre=row['genre'], age_limite=int(row['age_limite']))
             movies.update({Movie.ID: movie})
     return movies
 
