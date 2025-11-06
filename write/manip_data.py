@@ -50,16 +50,8 @@ class ManipData():
         # Commiter votre travail & merge.
 
     def add_movie(self, titre: str, annee_production: int, genre:str, age_limite: int) -> None:
-        if type(titre) is not str:
-            raise TypeError("'titre' must be a string.")
-        if type(annee_production) is not int:
-            raise TypeError("'annee_production' must be a string.")
-        if type(genre) is not str:
-            raise TypeError("'genre' must be a string.")
-        if type(age_limite) is not int:
-            raise TypeError("'age_limite' must be a string.")
-        id_movie = max(list(self.movies.keys())) + 1
-        self.movies.update({id_movie: Movie(titre=titre, annee_production=annee_production, genre=genre, age_limite=age_limite)})
+        movie: Movie = Movie(titre=titre, annee_production=annee_production, genre=genre, age_limite=age_limite)
+        self.movies.update({Movie.ID: movie})
         self.write_csv()
 
     # Modifier un film
@@ -76,8 +68,11 @@ class ManipData():
         movie.annee_production = annee_production
         movie.genre = genre
         movie.age_limite = age_limite
+        self.write_csv()
 
     # Supprimer un film
         # Supprimer un film sur la base de son id.
         # Commiter votre travail & merge .
         # Si possible, chaque action doit être développée sur une branche Git dédiée, puis mergée dans la branche principale.
+    
+    

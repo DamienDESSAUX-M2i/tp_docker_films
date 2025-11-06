@@ -9,6 +9,7 @@ def main() -> None:
     print(manip_data.movies)
     manip_data.add_movie("titre", 2000, "genre", 18)
     print(manip_data.movies)
+    manip_data.mofify_movie(1, "titre", 0, "genre", 0)
 
 
 if __name__ == "__main__":
