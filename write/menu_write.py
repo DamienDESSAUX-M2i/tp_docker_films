@@ -5,6 +5,7 @@ import manip_data as manip_data
 from exceptions.invalid_id_exception import InvalidIdException
 from exceptions.invalid_title_exception import InvalidTitleException
 from exceptions.invalid_age_limit_exception import InvalidAgeLimitException
+from exceptions.invalid_signal_exception import InvalidSignalException
 from exceptions.invalid_genre_exception import InvalidGenreException
 from exceptions.invalid_year_exception import InvalidYearException
 
@@ -112,6 +113,6 @@ class MenuWrite:
                     case "0":
                         break
                     case _:
-                        raise ValueError("Erreur de saisie. Veuillez recommencer.")
-            except ValueError as e:
-                print(e)
+                        raise InvalidSignalException("Erreur de saisie. Veuillez recommencer.")
+            except InvalidSignalException as e:
+                e.display_message_error
