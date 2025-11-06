@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from models.movies import Movie
-import write.manip_data as manip_data
-from write.exceptions.invalid_id_exception import InvalidIdException
-from write.exceptions.invalid_title_exception import InvalidTitleException
-from write.exceptions.invalid_age_limit_exception import InvalidAgeLimitException
-from write.exceptions.invalid_genre_exception import InvalidGenreException
-from write.exceptions.invalid_year_exception import InvalidYearException
+import manip_data as manip_data
+from exceptions.invalid_id_exception import InvalidIdException
+from exceptions.invalid_title_exception import InvalidTitleException
+from exceptions.invalid_age_limit_exception import InvalidAgeLimitException
+from exceptions.invalid_genre_exception import InvalidGenreException
+from exceptions.invalid_year_exception import InvalidYearException
 
 
 class MenuWrite:

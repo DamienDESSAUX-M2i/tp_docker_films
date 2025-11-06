@@ -1,0 +1,28 @@
+services:
+  read:
+    build: ./read
+    restart: always
+    ports:
+      - 5001:5001
+    networks:
+      - app_network
+    volumes:
+      - movies:/app/data
+
+  write:
+    depends_on:
+      - read
+    build: ./write
+    restart: always
+    ports:
+      - 5002:5002
+    networks:
+      - app_network
+    volumes:
+      - movies:/app/data
+
+volumes:
+  movies:
+
+networks:
+  app_network:

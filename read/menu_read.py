@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from models.movies import Movie
-import read.read_data as read_data
-from read.exceptions.invalid_id_exception import InvalidIdException
-from read.exceptions.invalid_title_exception import InvalidTitleException
-from read.exceptions.invalid_age_limit_exception import InvalidAgeLimitException
-from read.exceptions.invalid_genre_exception import InvalidGenreException
-from read.exceptions.invalid_year_exception import InvalidYearException
+import read_data
+from exceptions.invalid_id_exception import InvalidIdException
+from exceptions.invalid_title_exception import InvalidTitleException
+from exceptions.invalid_age_limit_exception import InvalidAgeLimitException
+from exceptions.invalid_genre_exception import InvalidGenreException
+from exceptions.invalid_year_exception import InvalidYearException
 
 
 class MenuRead:
