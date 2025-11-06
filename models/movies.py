@@ -7,7 +7,7 @@ class Movie:
         Args:
             titre (str): Title of the movie.
             annee_production (int): Year of production of the movie.
-            genre (str): Movie type.
+            genre (str): Genre of the movie.
             age_limite (int): Age limit for the movie.
         """
         self.titre: str = titre
