@@ -38,16 +38,27 @@ def write_csv(file_path: Path, movies: dict[int, Movie]) -> None:
 # Récupérer un film par son titre.
 
 def get_movie_title(file_path: Path, titre: str) -> Movie|None:
+    if type(titre) is not str:
+        raise TypeError("The type of 'titre' must be str.")
     movies: dict[int, Movie] = load_csv(file_path=file_path)
     for movie in movies.values():
         if movie.titre == titre:
             return movie
     return None
 
-# Commiter votre travail & merge.
 # Récupérer la liste des films ayant une limite d’âge inférieure ou égale à une valeur donnée.
-# Commiter votre travail & merge.
+
+def get_movies_age_limit(file_path: Path, age_limite: int) -> list[Movie]:
+    if type(age_limite) is not int:
+        raise TypeError("The type of 'age_limite' must be int.")
+    movies: dict[int, Movie] = load_csv(file_path=file_path)
+    movies_accepted: list[Movie] = []
+    for movie in movies.values():
+        if movie.age_limite == age_limite:
+            movies_accepted.append(movie)
+    return movies_accepted
+
 # Récupérer la liste des films d’un certain genre.
-# Commiter votre travail & merge.
+
 # Récupérer la liste des films produits entre deux années données (année de début et année de fin).
-# Commiter votre travail & merge.
+
