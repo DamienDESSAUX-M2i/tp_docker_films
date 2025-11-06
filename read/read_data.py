@@ -37,8 +37,12 @@ def write_csv(file_path: Path, movies: dict[int, Movie]) -> None:
 
 # Récupérer un film par son titre.
 
-def get_movie_title(file_path: Path, title: str):
-    pass
+def get_movie_title(file_path: Path, titre: str) -> Movie|None:
+    movies: dict[int, Movie] = load_csv(file_path=file_path)
+    for movie in movies.values():
+        if movie.titre == titre:
+            return movie
+    return None
 
 # Commiter votre travail & merge.
 # Récupérer la liste des films ayant une limite d’âge inférieure ou égale à une valeur donnée.
