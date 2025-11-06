@@ -1,6 +1,7 @@
 services:
   read:
     build: ./read
+    container_name: read
     restart: always
     ports:
       - 5001:5001
@@ -13,6 +14,7 @@ services:
     depends_on:
       - read
     build: ./write
+    container_name: write
     restart: always
     ports:
       - 5002:5002
