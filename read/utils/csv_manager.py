@@ -3,6 +3,7 @@ import csv
 
 from models.movies import Movie
 from exceptions.path_does_not_exist_exception import PathDoesNotExistException
+from utils.genre import Genre
 
 
 def load_csv(file_path: Path) -> dict[int, Movie]:

@@ -1,7 +1,10 @@
+from utils.genre import Genre
+
+
 class Movie:
     ID: int = 0
 
-    def __init__(self, titre: str, annee_production: int, genre: str, age_limite: int) -> None:
+    def __init__(self, titre: str, annee_production: int, genre: Genre, age_limite: int) -> None:
         """Constructor of the class Movie.
 
         Args:
@@ -11,11 +14,14 @@ class Movie:
             age_limite (int): Age limit for the movie.
         """
         Movie.ID += 1
-        self._titre: str = ""
+        self._titre: str = None
         self.titre = titre
-        self._annee_production: int = annee_production
-        self._genre: str = genre
-        self._age_limite: int = age_limite
+        self._annee_production: int = None
+        self.annee_production = annee_production
+        self._genre: str = None
+        self.genre = genre
+        self._age_limite: int = None
+        self.age_limite = age_limite
     
     @property
     def titre(self) -> str:
@@ -38,13 +44,13 @@ class Movie:
         self._annee_production = annee_production
     
     @property
-    def genre(self) -> str:
+    def genre(self) -> Genre:
         return self._genre
     
     @genre.setter
-    def genre(self, genre: str) -> None:
-        if not isinstance(genre, str):
-            raise TypeError('Type of genre must be str.')
+    def genre(self, genre: Genre) -> None:
+        if not isinstance(genre, Genre):
+            raise TypeError('Type of genre must be an instance of class Genre.')
         self._genre = genre
     
     @property
