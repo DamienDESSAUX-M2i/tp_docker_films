@@ -2,15 +2,7 @@ from pathlib import Path
 import csv
 
 from models.movies import Movie
-
-
-class PathDoesNotExistException(Exception):
-    def __init__(self, msg: str, *args):
-        super().__init__(*args)
-        self.msg = msg
-    
-    def display_message_error(self) -> None:
-        print(self.msg)
+from exceptions.path_does_not_exist_exception import PathDoesNotExistException
 
 
 def load_csv(file_path: Path) -> dict[int, Movie]:
