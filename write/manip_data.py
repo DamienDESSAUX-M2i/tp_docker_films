@@ -25,16 +25,23 @@ class ManipData():
         with open(file=self.file_path, mode="rt", encoding="utf-8", newline="") as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=',')
             for row in csv_reader:
-                movies.update({row['id']: Movie(titre=row['titre'], annee_production=row['annee_production'], genre=row['genre'], age_limite=row['age_limite'])})
+                movie: Movie = Movie(titre=row['titre'], annee_production=row['annee_production'], genre=row['genre'], age_limite=row['age_limite'])
+                movies.update({Movie.ID: movie})
         return movies
 
     def write_csv(self) -> None:
-        if not(isinstance(self.movies, dict) and all(isinstance(movie, Movie) for movie in self.movies.values())):
-            raise TypeError("'movies' must be a dict whose values are instances of the class Movie.")
         with open(file=self.file_path, mode="wt", encoding="utf-8", newline="") as csv_file:
-            csv_writer = csv.writer(csv_file, delimiter=',')
+            fieldnames: list[str] = ["id", "titre", "annee_production", "genre", "age_limite"]
+            csv_writer = csv.DictWriter(csv_file, delimiter=',', fieldnames=fieldnames)
+            csv_writer.writeheader()
             for id, movie in self.movies.items():
-                csv_writer.writerow([id, movie.titre, movie.annee_production, movie.genre, movie.age_limite])
+                csv_writer.writerow({
+                    "id": id,
+                    "titre": movie.titre,
+                    "annee_production": movie.annee_production, 
+                    "genre": movie.genre,
+                    "age_limite": movie.age_limite
+                })
 
     # Ajouter un film
         # Demander les informations nécessaires à l’utilisateur.
@@ -43,6 +50,14 @@ class ManipData():
         # Commiter votre travail & merge.
 
     def add_movie(self, titre: str, annee_production: int, genre:str, age_limite: int) -> None:
+        if type(titre) is not str:
+            raise TypeError("'titre' must be a string.")
+        if type(annee_production) is not int:
+            raise TypeError("'annee_production' must be a string.")
+        if type(genre) is not str:
+            raise TypeError("'genre' must be a string.")
+        if type(age_limite) is not int:
+            raise TypeError("'age_limite' must be a string.")
         id_movie = max(list(self.movies.keys())) + 1
         self.movies.update({id_movie: Movie(titre=titre, annee_production=annee_production, genre=genre, age_limite=age_limite)})
         self.write_csv()
@@ -54,7 +69,13 @@ class ManipData():
         # Commiter votre travail & merge.
 
     def mofify_movie(self, id: int, titre: str, annee_production: int, genre:str, age_limite: int) -> None:
+        if id not in self.movies.keys():
+            raise IndexError(f"'{id}' is not a key of movies")
         movie: Movie = self.movies[id]
+        movie.titre = titre
+        movie.annee_production = annee_production
+        movie.genre = genre
+        movie.age_limite = age_limite
 
     # Supprimer un film
         # Supprimer un film sur la base de son id.

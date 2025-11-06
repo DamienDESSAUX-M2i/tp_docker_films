@@ -10,6 +10,7 @@ class Movie:
             genre (str): Genre of the movie.
             age_limite (int): Age limit for the movie.
         """
+        Movie.ID += 1
         self.titre: str = titre
         self.annee_production: int = annee_production
         self.genre: str = genre
@@ -20,4 +21,4 @@ class Movie:
         infos: list[str] = ["=== Infos ==="]
         for attribut, value in self.__dict__.items():
             infos.append(f"{attribut} : {value}")
-        print("/n".join(infos))
+        return "\n".join(infos)
