@@ -75,4 +75,15 @@ class ManipData():
         # Commiter votre travail & merge .
         # Si possible, chaque action doit être développée sur une branche Git dédiée, puis mergée dans la branche principale.
     
-    
+    def _reset_ids(self) -> None:
+        movies: dict[int, Movie] = {}
+        for id, movie in enumerate(self.movies.values(), start=1):
+            movies.update({id: movie})
+        self.movies = movies
+
+    def remove_movie(self, id: int) -> None:
+        if id not in self.movies.keys():
+            raise IndexError(f"'{id}' is not a key of movies")
+        self.movies.pop(id)
+        self._reset_ids()
+        self.write_csv()
