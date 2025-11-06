@@ -2,4 +2,4 @@ FROM python:latest
 WORKDIR /app
 COPY . .
 EXPOSE 5002
-CMD ["tail", "-f, "/dev/null"]
+CMD ["tail", "-f", "/dev/null"]
