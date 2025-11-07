@@ -46,14 +46,6 @@ class MenuRead:
                 return user_input
         raise InvalidYearException("L'âge doit être un nombre entier positif.")
 
-    def show_id(self) -> int:
-        while True:
-            try:
-                id = self.user_input_id()
-                return id
-            except InvalidIdException as e:
-                e.display_message_error()
-
     def show_title(self) -> str:
         while True:
             try:
