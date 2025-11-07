@@ -12,7 +12,7 @@ services:
     volumes:
       - movies:/app/data
       - utils:/app/utils
-      - execptions:/app/exceptions
+      - exceptions:/app/exceptions
 
   write:
     depends_on:
@@ -27,7 +27,7 @@ services:
     volumes:
       - movies:/app/data
       - utils:/app/utils
-      - execptions:/app/exceptions
+      - exceptions:/app/exceptions
 
 volumes:
   movies:
