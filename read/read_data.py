@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from models.movies import Movie
+from models.movie import Movie
 from utils.csv_manager import load_csv
 from utils.genre import Genre
 
@@ -24,7 +24,7 @@ def get_movies_age_limit(file_path: Path, age_limite: int) -> list[Movie]:
     movies: dict[int, Movie] = load_csv(file_path=file_path)
     valid_movies: list[Movie] = []
     for movie in movies.values():
-        if movie.age_limite <= age_limite:
+        if movie.age_limite >= age_limite:
             valid_movies.append(movie)
     return valid_movies
 

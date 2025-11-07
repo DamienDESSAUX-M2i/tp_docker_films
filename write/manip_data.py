@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from models.movies import Movie
+from models.movie import Movie
 from utils.csv_manager import load_csv, write_csv
 from utils.genre import Genre
 

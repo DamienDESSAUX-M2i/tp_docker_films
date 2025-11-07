@@ -1,10 +1,9 @@
 from pathlib import Path
 
-from models.movies import Movie
+from models.movie import Movie
 from utils.genre import Genre
 from utils.menu import Menu
-from utils.csv_manager import load_csv
-import manip_data as manip_data
+import manip_data
 from exceptions.invalid_signal_exception import InvalidSignalException
 
 
@@ -39,9 +38,6 @@ class MenuWrite(Menu):
 
     def modify_movie(self) -> None:
         print("=== Modifier un film ===")
-        # If the database has never been loaded,
-        # then the database is loaded to assign the Movie.ID class variable.
-        load_csv(file_path=self.file_path)
         id_movie = self.show_id(
             born_inf=1,
             born_sup=Movie.ID,
@@ -74,9 +70,6 @@ class MenuWrite(Menu):
 
     def remove_movie(self) -> None:
         print("=== Supprimer un film ===")
-        # If the database has never been loaded,
-        # then the database is loaded to assign the Movie.ID class variable.
-        load_csv(file_path=self.file_path)
         id_movie: int = self.show_id(
             born_inf=1,
             born_sup=Movie.ID,

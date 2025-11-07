@@ -1,7 +1,7 @@
 from pathlib import Path
 import csv
 
-from models.movies import Movie
+from write.models.movie import Movie
 from exceptions.path_does_not_exist_exception import PathDoesNotExistException
 from utils.genre import Genre
 
