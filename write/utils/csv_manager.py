@@ -44,10 +44,10 @@ def write_csv(file_path: Path, movies: dict[int, Movie]) -> None:
         ]
         csv_writer = csv.DictWriter(csv_file, delimiter=",", fieldnames=fieldnames)
         csv_writer.writeheader()
-        for id, movie in enumerate(movies.values(), start=1):
+        for id_movie, movie in enumerate(movies.values(), start=1):
             csv_writer.writerow(
                 {
-                    "id": id,
+                    "id": id_movie,
                     "titre": movie.titre,
                     "annee_production": movie.annee_production,
                     "genre": movie.genre.value,

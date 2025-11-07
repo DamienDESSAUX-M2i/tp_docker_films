@@ -21,16 +21,16 @@ def add_movie(
 
 def mofify_movie(
     file_path: Path,
-    id: int,
+    id_movie: int,
     titre: str,
     annee_production: int,
     genre: Genre,
     age_limite: int,
 ) -> None:
     movies: dict[int, Movie] = load_csv(file_path=file_path)
-    if id not in movies.keys():
-        raise IndexError(f"'{id}' is not a key of movies")
-    movie: Movie = movies[id]
+    if id_movie not in movies.keys():
+        raise IndexError(f"'{id_movie}' is not a key of movies")
+    movie: Movie = movies[id_movie]
     movie.titre = titre
     movie.annee_production = annee_production
     movie.genre = genre
@@ -38,9 +38,9 @@ def mofify_movie(
     write_csv(file_path=file_path, movies=movies)
 
 
-def remove_movie(file_path: Path, id: int) -> None:
+def remove_movie(file_path: Path, id_movie: int) -> None:
     movies: dict[int, Movie] = load_csv(file_path=file_path)
-    if id not in movies.keys():
-        raise IndexError(f"There is no movie with id : '{id}'.")
-    movies.pop(id)
+    if id_movie not in movies.keys():
+        raise IndexError(f"There is no movie with id_movie : '{id_movie}'.")
+    movies.pop(id_movie)
     write_csv(file_path=file_path, movies=movies)
