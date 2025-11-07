@@ -1,3 +1,5 @@
+name: tp_docker_films
+
 services:
   read:
     build: ./read
@@ -9,6 +11,8 @@ services:
       - app_network
     volumes:
       - movies:/app/data
+      - utils:/app/utils
+      - execptions:/app/exceptions
 
   write:
     depends_on:
@@ -22,9 +26,13 @@ services:
       - app_network
     volumes:
       - movies:/app/data
+      - utils:/app/utils
+      - execptions:/app/exceptions
 
 volumes:
   movies:
+  utils:
+  exceptions:
 
 networks:
   app_network:
